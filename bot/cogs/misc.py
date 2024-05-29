@@ -263,5 +263,12 @@ class Misc(commands.Cog, name="Misc"):
         await self.set_afk(ctx.author.id, reason)
         await ctx.reply(f"✅ Successfully set your afk reason to *{reason}*!")
 
+    @commands.command()
+    async def serverinfo(self, ctx):
+        embed = discord.Embed(title="SERVER INFO", description=f"Name: **{ctx.guild.name}**\n<:1166196254141861979:1244752051313840199>ID: **1121841073673736215**\n<:1166196254141861979:1244752051313840199>Owned by: **<@{ctx.guild.owner_id}>**\n<:1166196258499727480:1244752002492268685>Date created: <t:1585600920:D>\n<:CF10:1244752150613987460>**{len(ctx.guild.channels)}** channels\n<:CF10:1244752150613987460>**{len(ctx.guild.roles)}** roles\n<:CF10:1244752150613987460>**{ctx.guild._member_count}** members\n<:CF10:1244752150613987460>**{ctx.guild.premium_subscription_count}** boosts\n<:Empty:1244752102807441540><:1166196254141861979:1244752051313840199>Booster tier: **{ctx.guild.premium_tier}**\n<:Empty:1244752102807441540><:1166196258499727480:1244752002492268685>Booster role: <@&{ctx.guild.premium_subscriber_role.id}>", color=0x2b2d31)
+        embed.set_thumbnail(url=ctx.guild.icon)
+        embed.set_image(url=ctx.guild.banner)
+        await ctx.reply(embed=embed)
+
 async def setup(bot):
     await bot.add_cog(Misc(bot))
