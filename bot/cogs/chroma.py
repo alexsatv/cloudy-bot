@@ -33,6 +33,23 @@ from utils.subclasses import Context
 from typing import Optional
 import asyncpg
 
+class infoview(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+        self.value = None
+
+    @discord.ui.button(label="Logos")
+    async def klogos(self, interaction: discord.Interaction, button: discord.ui.Button):
+        logosembed = discord.Embed(title="<a:bun:1098764398962671677> Chroma Logos!", description="˃ Please make sure you watermark the logos!\n˃ Use the hashtag on every edit\n˃ Do not share this link with anyone outside the group!", color=0x2b2d31)
+        logosembed.set_footer(text="Made us some logos? send them to Reece or Alisha!")
+        logosembed.set_image(url=interaction.guild.banner)
+        await interaction.user.send(f"key: `{logo_code}`\n{logos}", embed=logosembed)
+        channel = interaction.client.get_channel(1069358104740900985)
+        log = discord.Embed(title="Logo button has been used!", description=f"`{interaction.user.display_name}` has used the logos button", color=0x2b2d31)
+        log.set_footer(text=f"id: {interaction.user.id}", icon_url=interaction.user.display_avatar)
+        await channel.send(embed=log)
+        await interaction.response.send_message(f'I have sent you the logos! Check your DMs', ephemeral=True)
+
 class DownloadView(discord.ui.View):
     def __init__(self, username: str):
         super().__init__()
@@ -253,6 +270,25 @@ class Chroma(commands.Cog, name="Chroma", description="Includes the commands ass
             await ctx.reply("check your dms!")
         else:
             return
+
+    @commands.command(hidden=True)
+    async def info1(self, ctx):
+        embed = discord.Embed(title="Weclome to Chroma", color=0x2b2d31)
+        embed.add_field(name="Group Rules", value="• Must be following [remqsi](https://instagra,.com/remqsi), [wqndqs](https://instagram.com/wqndqs) + [chromagrp](https://instagram.com/chromagrp)"
+                                            "\n• Always use our hashtag #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽"
+                                            "\n• Watermark logos if the background is mostly plain"
+                                            "\n• Never share the logos with anyone outside of Chroma", inline=False)
+        embed.add_field(name="Chat Rules", value="• No NSFW content or sexual discussions"
+                            "\n• No offensive jokes that can make others uncomfortable"
+                            "\n• Please stay as active as possible"
+                            '\n• Set your nickname as "name | username"'
+                            "\n• No impersonating other editors"
+                            "\n• Be friendly and respect everyone"
+                            "\n• If you move accounts or leave, please dm [chromagrp](https://instagram.com/chromagrp)"
+                            "\n• No trash talking of other groups or editors"
+                            "\n• Respect the server and use channels correctly", inline=False)
+        embed.set_thumbnail(url=ctx.guild.icon)
+        await ctx.send(embed=embed, view=infoview())
 
 async def setup(bot):
     await bot.add_cog(Chroma(bot))
