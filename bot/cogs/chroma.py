@@ -43,7 +43,7 @@ class infoview(discord.ui.View):
         logosembed = discord.Embed(title="<a:bun:1098764398962671677> Chroma Logos!", description="˃ Please make sure you watermark the logos!\n˃ Use the hashtag on every edit\n˃ Do not share this link with anyone outside the group!", color=0x2b2d31)
         logosembed.set_footer(text="Made us some logos? send them to Reece or Alisha!")
         logosembed.set_image(url=interaction.guild.banner)
-        await interaction.user.send(f"key: `{logo_code}`\n{logos}", embed=logosembed)
+        await interaction.user.send(f"key: `{logo_code}`\n{logos}\nhashtag: #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽", embed=logosembed)
         channel = interaction.client.get_channel(1069358104740900985)
         log = discord.Embed(title="Logo button has been used!", description=f"`{interaction.user.display_name}` has used the logos button", color=0x2b2d31)
         log.set_footer(text=f"id: {interaction.user.id}", icon_url=interaction.user.display_avatar)
