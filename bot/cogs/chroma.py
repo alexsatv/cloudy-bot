@@ -273,20 +273,20 @@ class Chroma(commands.Cog, name="Chroma", description="Includes the commands ass
 
     @commands.command(hidden=True)
     async def info1(self, ctx):
-        embed = discord.Embed(title="Weclome to Chroma", color=0x2b2d31)
-        embed.add_field(name="Group Rules", value="• Must be following [remqsi](https://instagra,.com/remqsi), [wqndqs](https://instagram.com/wqndqs) + [chromagrp](https://instagram.com/chromagrp)"
-                                            "\n• Always use our hashtag #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽"
-                                            "\n• Watermark logos if the background is mostly plain"
-                                            "\n• Never share the logos with anyone outside of Chroma", inline=False)
+        embed = discord.Embed(title="Welcome to Chroma", color=0x2b2d31)
+        embed.add_field(name="Group Rules", value="• Must be following [remqsi](https://instagram.com/remqsi), [wqndqs](https://instagram.com/wqndqs) + [chromagrp](https://instagram.com/chromagrp)"
+        "\n• Always use our hashtag #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽"
+        "\n• Watermark logos if the background is mostly plain"
+        "\n• Never share the logos with anyone outside of Chroma", inline=False)
         embed.add_field(name="Chat Rules", value="• No NSFW content or sexual discussions"
-                            "\n• No offensive jokes that can make others uncomfortable"
-                            "\n• Please stay as active as possible"
-                            '\n• Set your nickname as "name | username"'
-                            "\n• No impersonating other editors"
-                            "\n• Be friendly and respect everyone"
-                            "\n• If you move accounts or leave, please dm [chromagrp](https://instagram.com/chromagrp)"
-                            "\n• No trash talking of other groups or editors"
-                            "\n• Respect the server and use channels correctly", inline=False)
+        "\n• No offensive jokes that can make others uncomfortable"
+        "\n• Please stay as active as possible"
+        '\n• Set your nickname as "name | username"'
+        "\n• No impersonating other editors"
+        "\n• Be friendly and respect everyone"
+        "\n• If you move accounts or leave, please DM [chromagrp](https://instagram.com/chromagrp)"
+        "\n• No trash talking of other groups or editors"
+        "\n• Respect the server and use channels correctly", inline=False)
         embed.set_thumbnail(url=ctx.guild.icon)
         await ctx.send(embed=embed, view=infoview())
 
