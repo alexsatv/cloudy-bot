@@ -33,7 +33,7 @@ import sys
 
 # Modals
 
-class Recruit(discord.ui.Modal, title="Chroma Recruit"):
+class RecruitModal(discord.ui.Modal, title="Chroma Recruit"):
 	instagram = discord.ui.TextInput(label="Instagram Username", placeholder="Put username here...")
 	edit_link = discord.ui.TextInput(label="Link to edit (Instagram/Streamble/TikTok)", placeholder="Put a link to an edit here...")
 	program = discord.ui.TextInput(label="Editing Program", placeholder="Put the editing program you use here...")
@@ -162,7 +162,7 @@ class Slash(commands.Cog):
 			if row is not None:
 				if int(row[4]) == 2:
 					return await interaction.response.send_message("You've already applied twice!", ephemeral=True)
-		await interaction.response.send_modal(Recruit())
+		await interaction.response.send_modal(RecruitModal())
 		
 	@app_commands.command(description="Check how many times you've applied")
 	async def applycheck(self, interaction: discord.Interaction):
