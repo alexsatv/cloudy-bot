@@ -43,7 +43,7 @@ class apply(discord.ui.View):
             if row is not None:
                  if int(row[4]) == 2:
                     return await interaction.response.send_message("You've already applied twice!", ephemeral=True)
-        await interaction.response.send_modal(Recruit())
+            await interaction.response.send_modal(Recruit())
 
 class Recruit(commands.Cog):
 
