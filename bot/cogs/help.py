@@ -63,7 +63,8 @@ class HelpDropdown(discord.ui.Select):
         embed = discord.Embed(title=f"{cog.qualified_name.capitalize()} Commands", description=f"Use `{prefix}help [command|group]` for more info.", color=0x9E74FF)
         embed.set_footer(text="Category: " + cog.qualified_name.capitalize())
         for command in commands:
-            embed.add_field(name=command.qualified_name, value=command.help, inline=False)
+            if command.hidden is False:
+                embed.add_field(name=command.qualified_name, value=command.help, inline=False)
 
         return embed
 
@@ -181,7 +182,8 @@ class HelpCommand(commands.MinimalHelpCommand):
         prefix = self.context.prefix
         embed = discord.Embed(title=f"{cog.qualified_name.capitalize()} Commands", description=f"Use `{prefix}help [command|group]` for more info.", color=0x9E74FF)
         for command in commands:
-            embed.add_field(name=command.qualified_name, value=command.help, inline=False)
+            if command.hidden is False:
+                embed.add_field(name=command.qualified_name, value=command.help, inline=False)
 
         channel = self.get_destination()
         embed.set_footer(text=f"Category: {cog.qualified_name.capitalize()}")

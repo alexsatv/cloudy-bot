@@ -28,7 +28,7 @@ from typing import Union
 import asyncio
 from setup.config import chroma_welc
 from utils.subclasses import Context
-from cogs.slash import Recruit
+from cogs.slash import RecruitModal
 
 class apply(discord.ui.View):
     def __init__(self):
@@ -43,7 +43,7 @@ class apply(discord.ui.View):
             if row is not None:
                  if int(row[4]) == 2:
                     return await interaction.response.send_message("You've already applied twice!", ephemeral=True)
-            await interaction.response.send_modal(Recruit())
+        await interaction.response.send_modal(RecruitModal())
 
 class Recruit(commands.Cog):
 
@@ -62,7 +62,7 @@ class Recruit(commands.Cog):
     @commands.command()
     @is_staff()
     async def rct(self, ctx):
-        embed = discord.Embed(title="Chroma Comeback Recruit", description="Welcome to [chromagrp's](https://instagram.com/chromagrp) come back recruit! This recruit marks a new beginning for the group, and we hope you come and see what we have in store!\n\n__Information about the recruit:__\n> • Make sure you have followed all rules on the recruit post\n> • Click the **Apply** button and fill out the form, then submit\n> • You only have __2__ attempts to apply, use them wisely\n> • Cloudy will DM you to say if you have been accepted\n> • Please be patient with us! you will get a response soon!\n\nIf you have anymore questions, feel free to ask in <#862624723057508372>", colour=0x2b2d31)
+        embed = discord.Embed(title="Chroma Comeback Recruit", description="Welcome to [chromagrp's](https://instagram.com/chromagrp) comeback recruit! This recruit marks a new beginning for the group, and we hope you come and see what we have in store!\n\n__Information about the recruit:__\n> • Make sure you have followed all rules on the recruit post\n> • Click the **Apply** button and fill out the form, then submit\n> • You only have __2__ attempts to apply, use them wisely\n> • Cloudy will DM you to say if you have been accepted\n> • Please be patient with us! you will get a response soon!\n\nIf you have anymore questions, feel free to ask in <#862624723057508372>", colour=0x2b2d31)
         embed.set_thumbnail(url=ctx.guild.icon)
         await ctx.send(embed=embed, view=apply())
 
