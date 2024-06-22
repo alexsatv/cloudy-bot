@@ -272,23 +272,50 @@ class Chroma(commands.Cog, name="Chroma", description="Includes the commands ass
             return
 
     @commands.command(hidden=True)
+    @commands.has_permissions(manage_guild=True)
     async def info1(self, ctx):
-        embed = discord.Embed(title="Welcome to Chroma", color=0x2b2d31)
-        embed.add_field(name="Group Rules", value="• Must be following [remqsi](https://instagram.com/remqsi), [wqndqs](https://instagram.com/wqndqs) + [chromagrp](https://instagram.com/chromagrp)"
-        "\n• Always use our hashtag #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽"
-        "\n• Watermark logos if the background is mostly plain"
-        "\n• Never share the logos with anyone outside of Chroma", inline=False)
+        embed = discord.Embed(title="Weclome to Chroma", color=0x2b2d31)
+        embed.add_field(name="Group Rules", value="• Must be following [remqsi](https://instagra,.com/remqsi), [wqndqs](https://instagram.com/wqndqs) + [chromagrp](https://instagram.com/chromagrp)"
+                                            "\n• Always use our hashtag #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽"
+                                            "\n• Watermark logos if the background is mostly plain"
+                                            "\n• Never share the logos with anyone outside of Chroma", inline=False)
         embed.add_field(name="Chat Rules", value="• No NSFW content or sexual discussions"
-        "\n• No offensive jokes that can make others uncomfortable"
-        "\n• Please stay as active as possible"
-        '\n• Set your nickname as "name | username"'
-        "\n• No impersonating other editors"
-        "\n• Be friendly and respect everyone"
-        "\n• If you move accounts or leave, please DM [chromagrp](https://instagram.com/chromagrp)"
-        "\n• No trash talking of other groups or editors"
-        "\n• Respect the server and use channels correctly", inline=False)
+                            "\n• No offensive jokes that can make others uncomfortable"
+                            "\n• Please stay as active as possible"
+                            '\n• Set your nickname as "name | username"'
+                            "\n• No impersonating other editors"
+                            "\n• Be friendly and respect everyone"
+                            "\n• If you move accounts or leave, please dm [chromagrp](https://instagram.com/chromagrp)"
+                            "\n• No trash talking of other groups or editors"
+                            "\n• Respect the server and use channels correctly", inline=False)
         embed.set_thumbnail(url=ctx.guild.icon)
         await ctx.send(embed=embed, view=infoview())
+
+    @commands.command(hidden=True)
+    @commands.has_permissions(manage_guild=True)
+    async def ccrules(self, ctx):
+        embed = discord.Embed(color=0x2b2d31)
+        embed.set_image(url="https://cdn.discordapp.com/attachments/1226134627664789526/1254162072351277066/welc_banner_00000_00000.png?ex=66787cf3&is=66772b73&hm=cb44b5ff9979c2cb672fc9a6f473e32e23727cd12a17644cb8db1f577e45ee87&")
+        embed2 = discord.Embed(description="__Server Rules__:"
+        "\n• English chat only"
+        "\n• Follow Discord's TOS and [guidelines](https://discord.com/guidelines)"
+        "\n• No NSFW content or sexual discussions"
+        "\n• Be nice and respectful to everyone"
+        "\n• No impersonating editors, Chroma staff, etc"
+        "\n• Use channels for their intended purpose"
+        "\n• No spamming pings; you will be warned"
+        "\n• No trash talking others"
+        "\n• No unnecessary pings to Chroma staff"
+        "\n• No spamming or flooding channels with messages", color=0x2b2d31)
+        await ctx.send(embed=embed)
+        socials = discord.ui.View()
+        insta = discord.ui.Button(label="instagram", url="https://www.instagram.com/chromagrp/")
+        remqsi = discord.ui.Button(label="remqsi", url="https://www.instagram.com/remqsi/")
+        wqndqs = discord.ui.Button(label="wqndqs", url="https://www.instagram.com/wqndqs/")
+        socials.add_item(insta)
+        socials.add_item(remqsi)
+        socials.add_item(wqndqs)
+        await ctx.send(embed=embed2, view=socials)
 
 async def setup(bot):
     await bot.add_cog(Chroma(bot))
