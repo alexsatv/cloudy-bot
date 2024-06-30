@@ -155,20 +155,18 @@ class events(commands.Cog):
         stored_guild_id = 694010548605550675
         scout_guild_id = 835495688832811039
         if member.guild.id == stored_guild_id:
-            embed = discord.Embed(title='Welcome to Chroma!', color=0xff3dc8, description=f"{member.mention} has joined the sever!\n• read the <#725373131220320347> and get your <#838298608704815114>\n• introduce yourself in <#727875317439528982>\n• questions? ask a <@&753678720119603341> or <@&739513680860938290>!\n• enjoy your time here in chroma! <3")
-            embed.set_footer(text='thank you for joining!', icon_url=member.display_avatar.url)
+            embed = discord.Embed(title='<a:shookylove:1082786001958744224> __Welcome to chroma!__', color=0x2b2d31, description=f"{member.name} has joined!\n> • Please make sure to read [our rules](https://discord.com/channels/694010548605550675/725373131220320347)\n> • Introduce yourself [here](https://discord.com/channels/694010548605550675/727875317439528982)\n> • Questions? ping <@&753678720119603341> or <@&739513680860938290>\nEnjoy your time here in chroma!")
             channel = self.bot.get_channel(725389930607673384)
-            embed.set_thumbnail(url='https://rqinflow.com/static/chroma_pfp.png')
-            await channel.send(f'{member.mention}')
-            await channel.send(embed=embed)
+            embed.set_thumbnail(url=member.display_avatar.url)
+            await channel.send(f'{member.mention}', embed=embed)
         elif member.guild.id == scout_guild_id:
             guild = self.bot.get_guild(694010548605550675)
             guild2 = self.bot.get_guild(835495688832811039)
             embed2 = discord.Embed(title="welcome!", color=0x303136, description=f"{member.mention} has joined the server!\n\n• read the <#835495896727814164>!\n• get editing help in <#862656708059594782>\n• talk to other editors <#836647673595428925>")
             embed2.set_footer(text='thanks for wanting to join chroma! <3', icon_url=member.display_avatar.url)
+            embed2.set_thumbnail(url=member.display_avatar.url)
             channel2 = self.bot.get_channel(836251337649160256)
-            await channel2.send(f'{member.mention}')
-            await channel2.send(embed=embed2)
+            await channel2.send(f'{member.mention}', embed=embed2)
             member2 = guild.get_member(member.id)
             if member2 is None:
                 await member.add_roles(member.guild.get_role(public))
@@ -180,7 +178,7 @@ class events(commands.Cog):
         stored_guild_id = 694010548605550675
         if member.guild.id == stored_guild_id:
             await self.delete_rank(userid=member.id)
-            embed = discord.Embed(title="Member left!", color=0x96bfff, description=f"{member.mention} has left the discord.")
+            embed = discord.Embed(title="Member left!", color=0x2b2d31, description=f"{member.mention} has left the discord.")
             embed.set_thumbnail(url=member.display_avatar.url)
             embed.set_footer(text='i hope to see you again!', icon_url='https://cdn.discordapp.com/attachments/799984745772875786/800015677653909504/yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.png')
             channel = self.bot.get_channel(725389930607673384)
