@@ -550,5 +550,23 @@ class Levels(commands.Cog):
         await channel.send(embed=embed)
         await interaction.followup.send("Registered your inactivity")
 
+    async def reset_xp(self, member: discord.Member, guild_id: int) -> None:
+        query = "UPDATE levels SET xp = 0, message = 0 - $1 WHERE guild_id = $1"
+        async with self.bot.pool.acquire() as connection:
+            async with connection.transaction():
+                await connection.execute(query, guild_id)
+        await self.bot.pool.release(connection)
+
+    @commands.command(hidden=True)
+    @commands.has_role(753678720119603341)
+    async def remove(self, ctx: commands.Context):
+        """Resets all member xo"""
+        try:
+            await self.reset_xp(ctx.guild.id)
+        except Exception as e:
+            embed = discord.Embed("Error!", description=f"`{e}`", color=0xe63241)
+            return await ctx.send(embed=embed)
+        await ctx.send(f"Succesfully reset all members levels!")
+
 async def setup(bot: commands.Bot):
     await bot.add_cog(Levels(bot))
