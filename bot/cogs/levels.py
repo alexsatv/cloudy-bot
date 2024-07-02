@@ -559,7 +559,7 @@ class Levels(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.has_role(753678720119603341)
-    async def remove(self, ctx: commands.Context):
+    async def reset(self, ctx: commands.Context):
         """Resets all member xo"""
         try:
             await self.reset_xp(ctx.guild.id)
