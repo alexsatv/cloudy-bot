@@ -550,8 +550,8 @@ class Levels(commands.Cog):
         await channel.send(embed=embed)
         await interaction.followup.send("Registered your inactivity")
 
-    async def reset_xp(self, member: discord.Member, guild_id: int) -> None:
-        query = "UPDATE levels SET xp = 0, message = 0 - $1 WHERE guild_id = $1"
+    async def reset_xp(self, guild_id: int) -> None:
+        query = "UPDATE levels SET xp = 0, message = 0 WHERE guild_id = $1"
         async with self.bot.pool.acquire() as connection:
             async with connection.transaction():
                 await connection.execute(query, guild_id)
