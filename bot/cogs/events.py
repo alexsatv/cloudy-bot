@@ -114,7 +114,7 @@ class events(commands.Cog):
         if 'kijn' in message.content:
             await message.channel.send('kay and tijn are soulmates!!!')
         if message.content == 'luki':
-            await message.reply('the straightest male fr', mention_author=False)
+            await message.reply('the straightest male fr (i lied)', mention_author=False)
         if message.content == 'kai':
             await message.channel.send('**crack** <:sadjihyo:1076908378133119056>')
         if message.content.lower() == 'chroma':
@@ -155,6 +155,7 @@ class events(commands.Cog):
         stored_guild_id = 694010548605550675
         scout_guild_id = 835495688832811039
         if member.guild.id == stored_guild_id:
+            await member.add_roles(member.guild.get_role(role))
             embed = discord.Embed(title='<a:shookylove:1082786001958744224> __Welcome to chroma!__', color=0x2b2d31, description=f"{member.name} has joined!\n> • Please make sure to read [our rules](https://discord.com/channels/694010548605550675/725373131220320347)\n> • Introduce yourself [here](https://discord.com/channels/694010548605550675/727875317439528982)\n> • Questions? ping <@&753678720119603341> or <@&739513680860938290>\nEnjoy your time here in chroma!")
             channel = self.bot.get_channel(725389930607673384)
             embed.set_thumbnail(url=member.display_avatar.url)
@@ -173,7 +174,7 @@ class events(commands.Cog):
             if member2 is None:
                 await member.add_roles(member.guild.get_role(public))
             else:
-                await member.add_roles(member.guild.get_role(role))
+                await member.add_roles(member.guild.get_role(836244165637046283))
 
     @commands.Cog.listener()
     async def on_member_remove(self, member: discord.Member):
