@@ -151,7 +151,7 @@ class events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
         public = 835498963418480650
-        role = 836244165637046283
+        role = 694016195090710579
         stored_guild_id = 694010548605550675
         scout_guild_id = 835495688832811039
         if member.guild.id == stored_guild_id:
