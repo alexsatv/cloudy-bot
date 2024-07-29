@@ -539,16 +539,17 @@ class Levels(commands.Cog):
 
     @discord.app_commands.command(name="inactivity")
     @discord.app_commands.guilds(discord.Object(id=694010548605550675))
-    async def inactive(self, interaction: discord.Interaction, reason: str):
+    async def inactive(self, interaction: discord.Interaction, reason: str, instagram: str):
         """Handles monthly inactivity"""
         await interaction.response.defer(ephemeral=True)
         channel = self.bot.get_channel(849707778380922910)
         current_month = datetime.datetime.now().strftime("%B")
         await self.register_ia(interaction.user.id, reason, current_month)
-        embed = discord.Embed(title="inactivity", description=f"{reason}", color=0x32D052)
-        embed.set_footer(text=f"message from: {interaction.user.display_name}")
-        await channel.send(embed=embed)
-        await interaction.followup.send("Registered your inactivity")
+        embed = discord.Embed(title="Inactivity", description=f"Sent from: [@{instagram}](https://instagram.com/{instagram} )\nReason: {reason}", color=0x2b2d31)
+        embed.set_footer(text=f"User ID: {interaction.user.id}")
+        embed.set_thumbnail(url=interaction.user.display_avatar)
+        await channel.send(f"{interaction.user.mention}", embed=embed)
+        await interaction.response.send_message("Thanks! I have sent your message!")
 
     async def reset_xp(self, guild_id: int) -> None:
         query = "UPDATE levels SET xp = 0, messages = 0 WHERE guild_id = $1"
