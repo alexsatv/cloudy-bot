@@ -34,21 +34,48 @@ from typing import Optional
 import asyncpg
 
 class infoview(discord.ui.View):
-    def __init__(self):
+    def __init__(self, bot):
         super().__init__(timeout=None)
         self.value = None
+        self.bot = bot
 
     @discord.ui.button(label="Logos")
     async def klogos(self, interaction: discord.Interaction, button: discord.ui.Button):
-        logosembed = discord.Embed(title="<a:bun:1098764398962671677> Chroma Logos!", description="˃ Please make sure you watermark the logos!\n˃ Use the hashtag on every edit\n˃ Do not share this link with anyone outside the group!", color=0x2b2d31)
-        logosembed.set_footer(text="Made us some logos? send them to Reece or Alisha!")
-        logosembed.set_image(url=interaction.guild.banner)
-        await interaction.user.send(f"key: `{logo_code}`\n{logos}\nhashtag: #𝗰𝗵𝗿𝗼𝗺𝗮𝗴𝗿𝗽", embed=logosembed)
+        logos = discord.Embed(title="<a:bun:1098764398962671677> CHroma Logos!", description="˃ Please make sure you watermark the logos!\n˃ Use the watermark on every edit\n˃ Do not share this link with anyone outside the group!", color=0x2b2d31)
+        logos.set_footer(text="Made us some logos? send them to Reece or Alisha!")
+        logos.set_image(url=interaction.guild.banner)
+        await interaction.user.send("key: `9evZccDJkjjN7k64fAlAKw`\nhttps://mega.nz/folder/j8NniaoJ", embed=logos)
         channel = interaction.client.get_channel(1069358104740900985)
         log = discord.Embed(title="Logo button has been used!", description=f"`{interaction.user.display_name}` has used the logos button", color=0x2b2d31)
         log.set_footer(text=f"id: {interaction.user.id}", icon_url=interaction.user.display_avatar)
         await channel.send(embed=log)
         await interaction.response.send_message(f'I have sent you the logos! Check your DMs', ephemeral=True)
+
+    @discord.ui.button(label="inactive")
+    async def inactive(self, interaction: discord.Interaction, button: discord.Button):
+        await interaction.response.send_modal(ia(bot=self.bot))
+
+class ia(discord.ui.Modal):
+    def __init__(self, bot):
+        self.bot = bot
+        super().__init__(title="Inactive Message")
+
+    instagram = discord.ui.TextInput(label="Instagram Username", placeholder="Put username here...")
+    reason = discord.ui.TextInput(label="Why will you be inactive?", placeholder="Put a reason here", style=discord.TextStyle.long)
+
+    async def on_submit(self, interaction: discord.Interaction):
+        embed = discord.Embed(title="Inactivity", description=f"Sent from: [@{self.instagram.value}](https://instagram.com/{self.instagram.value} )\nReason: {self.reason.value}", color=0x2b2d31)
+        embed.set_thumbnail(url=interaction.user.display_avatar)
+        embed.set_footer(text=f"User ID: {interaction.user.id}")
+        msg = await interaction.client.get_channel(849707778380922910).send(f"{interaction.user.mention}", embed=embed)
+        await interaction.response.send_message('Thanks! I have sent your message!', ephemeral=True)
+
+    async def register_ia(self, member_id: int, reason: str, month: str) -> None:
+        async with self.bot.pool.acquire() as connection:
+            async with connection.transaction():
+                query = "INSERT INTO inactives (user_id, reason, month) VALUES ($1, $2, $3) ON CONFLICT (user_id, month) DO UPDATE SET reason = $2"
+                await connection.execute(query, member_id, reason, month)
+        await self.bot.pool.release(connection)
 
 class DownloadView(discord.ui.View):
     def __init__(self, username: str):
@@ -289,7 +316,7 @@ class Chroma(commands.Cog, name="Chroma", description="Includes the commands ass
                             "\n• No trash talking of other groups or editors"
                             "\n• Respect the server and use channels correctly", inline=False)
         embed.set_thumbnail(url=ctx.guild.icon)
-        await ctx.send(embed=embed, view=infoview())
+        await ctx.send(embed=embed, view=infoview(bot=self.bot))
 
     @commands.command(hidden=True)
     @commands.has_permissions(manage_guild=True)
